@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css"
+import Modal from "./Modal"
 import { useEffect, useState } from "react";
 const App = () => {
 
@@ -31,8 +32,18 @@ const App = () => {
     }, [])
 
 
+    
+
     const guardarTarea = async(e) => {
         e.preventDefault()
+        if (descripcion == "") {
+
+            document.getElementById("mymodal").style.display = "block";
+           
+            return 
+            
+        }
+
         const response = await fetch("api/tarea/Guardar", {
             method: "POST",
             headers: {
@@ -64,7 +75,7 @@ const App = () => {
 
 
     return (
-        <div className="container bg-dark p-12 vh-auto cover"  >
+        <div className="container bg-dark p-12 vh-auto"  >
             <h2 className="text-white">Lista de tareas</h2>
             <div className="row">
                 <div className="col-sm-12" >
@@ -99,7 +110,10 @@ const App = () => {
                     </div> 
                 </div>
             </div> 
+            <Modal />    
         </div>
+
+         
     )
 }
 
